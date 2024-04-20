@@ -48,6 +48,8 @@ for k, v in ExifTags.TAGS.items():
 
 def img2label_paths(img_paths):
     # Define label paths as a function of image paths
+    # import pdb
+    # pdb.set_trace()
     sa, sb = f'{os.sep}images{os.sep}', f'{os.sep}labels{os.sep}'  # /images/, /labels/ substrings
     return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.txt' for x in img_paths]
 
@@ -313,6 +315,8 @@ class TrainValDataset(Dataset):
         NUM_THREADS = min(8, os.cpu_count())
         img_paths = []
         for img_dir in img_dirs:
+            # import pdb
+            # pdb.set_trace()
             assert osp.exists(img_dir), f"{img_dir} is an invalid directory path!"
             img_paths += glob.glob(osp.join(img_dir, "**/*"), recursive=True)
 
@@ -364,6 +368,8 @@ class TrainValDataset(Dataset):
         # check and load anns
 
         img_paths = list(img_info.keys())
+        # import pdb
+        # pdb.set_trace()
         label_paths = img2label_paths(img_paths)
         assert label_paths, f"No labels found."
         label_hash = self.get_hash(label_paths)
